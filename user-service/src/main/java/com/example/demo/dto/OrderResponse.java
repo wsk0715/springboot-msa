@@ -16,10 +16,10 @@ public class OrderResponse {
     
     private Long id;
     private Long userId;
-    private String orderNumber;
-    private BigDecimal totalAmount;
+    private String productName;
+    private Integer quantity;
+    private BigDecimal price;
     private String status;
-    private LocalDateTime orderDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
