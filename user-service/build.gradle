@@ -1,0 +1,67 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.6'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+ext {
+	set('springCloudVersion', "2025.0.0")
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// Spring Boot Data JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	// Spring Boot Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
+	
+	// Spring Cloud OpenFeign (서비스 간 통신)
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	
+	
+	// H2 Database (개발용)
+	runtimeOnly 'com.h2database:h2'
+	
+	// MySQL Driver (운영용)
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	
+	// Flyway (데이터베이스 마이그레이션)
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-mysql'
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	// Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
